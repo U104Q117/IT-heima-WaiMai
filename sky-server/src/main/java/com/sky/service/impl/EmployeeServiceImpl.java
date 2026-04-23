@@ -99,7 +99,6 @@ public class EmployeeServiceImpl implements EmployeeService {
     }
 
     /**
-     *
      * @param employeePageQueryDTO
      * @return
      */
@@ -114,4 +113,27 @@ public class EmployeeServiceImpl implements EmployeeService {
         return new PageResult(total, records);
     }
 
+    /**
+     * 啟用禁用員工帳號
+     *
+     * @param status
+     * @param id
+     */
+    @Override
+    public void startOrStop(Integer status, Long id) {
+        // update employee  set status =? where id=?
+        //為了要把這個update方法可以動態更新 所以new一個employee對象
+        //不直接傳status id進去
+//        Employee employee = new Employee();
+//        employee.setStatus(status);
+//        employee.setId(id);
+
+        Employee employee = Employee.builder()
+                .status(status)
+                .id(id)
+                .build();
+
+        employeeMapper.update(employee);
+
+    }
 }
