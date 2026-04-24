@@ -86,13 +86,15 @@ public class EmployeeServiceImpl implements EmployeeService {
         employee.setPassword(DigestUtils.md5DigestAsHex(PasswordConstant.DEFAULT_PASSWORD.getBytes()));
 
         //設置當前創建時間和修改時間
-        employee.setCreateTime(LocalDateTime.now());
-        employee.setUpdateTime(LocalDateTime.now());
+
+        // employee.setCreateTime(LocalDateTime.now());
+        //  employee.setUpdateTime(LocalDateTime.now());
 
         //設置當前紀錄創建人ID和修改人ID
         // TODO 後面需要改為當前登入用戶的ID
-        employee.setCreateUser(BaseContext.getCurrentId());
-        employee.setUpdateUser(BaseContext.getCurrentId());
+
+        //  employee.setCreateUser(BaseContext.getCurrentId());
+        //  employee.setUpdateUser(BaseContext.getCurrentId());
 
         employeeMapper.insert(employee);
 
@@ -138,6 +140,7 @@ public class EmployeeServiceImpl implements EmployeeService {
 
     /**
      * 根據id查詢員工信息
+     *
      * @param id
      * @return
      */
@@ -148,17 +151,21 @@ public class EmployeeServiceImpl implements EmployeeService {
         return employee;
 
     }
+
     /**
      * 編輯員工信息
+     *
      * @param employeeDTO
      */
     @Override
     public void update(EmployeeDTO employeeDTO) {
         Employee employee = new Employee();
         BeanUtils.copyProperties(employeeDTO, employee);
-        employee.setUpdateTime(LocalDateTime.now());
+
+        //employee.setUpdateTime(LocalDateTime.now());
         //TODO這一步要再複習 不然去問AI BaseContext.getCurrentId()
-        employee.setUpdateUser(BaseContext.getCurrentId());
+
+        //employee.setUpdateUser(BaseContext.getCurrentId());
         employeeMapper.update(employee);
     }
 }
